@@ -1,0 +1,26 @@
+{
+  "name": "15-trees",
+  "version": "1.0.0",
+  "description": "![cf](http://i.imgur.com/7v5ASc8.png) Tree Data Structure ====",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose --coverage",
+    "lint": "eslint **/*.js",
+    "start": "node index.js",
+    "watch": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitHubMaxwell/15-trees.git"
+  },
+  "author": "maxwell rediker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GitHubMaxwell/15-trees/issues"
+  },
+  "homepage": "https://github.com/GitHubMaxwell/15-trees#readme",
+  "dependencies": {
+    "eslint": "^5.1.0",
+    "jest": "^23.4.1"
+  }
+}
