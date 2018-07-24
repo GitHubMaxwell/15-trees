@@ -14,7 +14,7 @@ class Tree {
   constructor() {
     this.head = null;
   }
-  add(value) {
+  insert(value) {
     const node = this.head;
     //right away assign the variable node to the contextual this.head of the tree we have instantiated and are running the add method on / if theres nothing in it add the data as the value of the head
     if(node === null) {
@@ -62,59 +62,6 @@ class Tree {
     }
   }
 
-  findMin() {
-    let current = this.head;
-    while(current.left !== null) {
-      //keep iterating to the left while theres still a value / because trees are sorted
-      current = current.left;
-    }
-    //then return the value from teh leftmost node
-    return current.value;
-  }
-
-  findMax() {
-    let current = this.head;
-    while(current.right !== null) {
-      //keep iterating to the right while theres still a value / because trees are sorted
-      current = current.right;
-    }
-    //then return the value from teh rightmost node
-    return current.value;
-  }
-
-  find(value) {
-    let current = this.head;
-    while(value !== current.value) {
-      if(value < current.value) {
-        current = current.left;
-      } else {
-        current = current.right;
-      }
-      if(current === null) {
-        return null;
-      }
-    }
-    return current;
-  }
-
-  isPresent(value) {
-    let current = this.head;
-    // while loop are less expensive than recurision
-    while(current) {
-      if(value === current.value) {
-        return true;
-        //maybe return the node
-      }
-      if(value < current.value) {
-        current = current.left;
-      } else {
-        current = current.right;
-      }
-    }
-    return false;
-    //if you dont find the matching value in the while loop then return false
-  }
-
   remove(value) {
     const removeNode = function(node, value) {
       if(node === null) {
@@ -155,6 +102,100 @@ class Tree {
     };
     this.head = removeNode(this.head, value);
   }
+
+  // findMin() {
+  //   let current = this.head;
+  //   while(current.left !== null) {
+  //     //keep iterating to the left while theres still a value / because trees are sorted
+  //     current = current.left;
+  //   }
+  //   //then return the value from teh leftmost node
+  //   return current.value;
+  // }
+
+  // findMax() {
+  //   let current = this.head;
+  //   while(current.right !== null) {
+  //     //keep iterating to the right while theres still a value / because trees are sorted
+  //     current = current.right;
+  //   }
+  //   //then return the value from teh rightmost node
+  //   return current.value;
+  // }
+
+  find(value) {
+    let current = this.head;
+
+    while(value !== current.value) {
+      if(value < current.value) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      if(current === null) {
+        return null;
+      }
+    }
+    return current;
+  }
+
+  // isPresent(value) {
+  //   let current = this.head;
+  //   // while loop are less expensive than recurision
+  //   while(current) {
+  //     if(value === current.value) {
+  //       return true;
+  //       //maybe return the node
+  //     }
+  //     if(value < current.value) {
+  //       current = current.left;
+  //     } else {
+  //       current = current.right;
+  //     }
+  //   }
+  //   return false;
+  //   //if you dont find the matching value in the while loop then return false
+  // }
+
+  static serialize() {
+    let string = '';
+    function _serialize(node) {
+      console.log(node);
+      if(node.left) {
+        _serialize(node.left);
+      }
+      string += `${node.value} - `;
+      if(node.right) {
+        _serialize(node.right);
+      }
+      return;
+    }
+    _serialize(this.head);
+    return string;
+  }
+
+  static deserialize(string) {
+    // given string like '3 - 2 - 1;
+    let tree = new Tree;
+    function _deserialize(node) {
+      console.log(node);
+
+      //have to split with regex into array and go through assigning head to first [0] and then from there if next > put node.right etc.
+      // or start the tree in the center of the split array as the head node
+      if(node.left) {
+        _deserialize(node.left);
+      }
+      string += `${node.value} - `;
+      if(node.right) {
+        _deserialize(node.right);
+      }
+      return;
+    }
+    _deserialize(this.head);
+    return tree;
+  }
+
 }
+
 
 module.exports = Tree;
